@@ -1,5 +1,5 @@
 # Bank
-projekt 
+
 Franciszek 
 
 Account.java – klasa bazowa; pola number, balance; metody deposit(), withdraw(), gettery/settery.
