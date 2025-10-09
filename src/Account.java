@@ -1,4 +1,4 @@
-public class Account {
+public class Account implements Transferable {
 
     private String accountNumber;
     private String owner;
@@ -11,7 +11,7 @@ public class Account {
 
 
     }
-
+    ////
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -48,6 +48,21 @@ public class Account {
             System.out.println("Pomyślnie wpłacono "+amount+" PLN, na koncie jest obecnie: "+balance+" PLN");
         }else{
             System.out.println("Nieprawidłowa kwota wpłaty!!");
+        }
+    }
+
+    public void transfer(){
+
+    }
+
+    @Override
+    public void transfer(Account acc1, Account acc2, double amount) {
+        if(acc1.balance >= amount && amount > 0){
+            acc1.balance -= amount;
+            acc2.balance += amount;
+            System.out.println("pomyslnie przelano "+amount+" PLN do uzytkownika "+acc2.owner);
+        }else{
+            System.out.println("nieprawidłowa kwota przelewu lub brak wystarczających średkow na koncie!!");
         }
     }
 }
