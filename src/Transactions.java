@@ -4,7 +4,7 @@ public class Transaction {
 
     Scanner myObj = new Scanner(System.in);
 
-    public void transakcje(String[] args, int a, int b, int c, double balans){
+    public void transakcje(String[] args, int a, String user,  String userid, double balans){
         if(a == 0){
             System.out.println("Jaką kwotę chcesz wpłacić");
             Scanner myObj = new Scanner(System.in);
