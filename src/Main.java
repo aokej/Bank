@@ -85,18 +85,20 @@ public class Main {
             System.out.print("Podaj numer konta jaki chcesz miec: ");
             nrKont = scanner.nextLine();
 
-            if(!BankUtils.isValidAccountNumber(nrKont)) {
+            try {
+                Long.parseLong(nrKont);
+            } catch (NumberFormatException e) {
                 System.out.println("numer konta musi zawierac same liczby!!");
                 continue;
             }
 
             boolean istnieje = false;
-
-                if (BankUtils.findAccountByNumber(accounts,nrKont) != null) {
+            for (Account konto : accounts) {
+                if (konto.getAccountNumber().equals(nrKont)) {
                     istnieje = true;
                     break;
                 }
-
+            }
 
             if (istnieje) {
                 System.out.println("nie mozesz posiadac numeru konta: " + nrKont + " poniewaz posiada je juz inny uzytkownik!!");
