@@ -1,44 +1,50 @@
-import java.util.Scanner;
-
 public class Transaction {
 
-    Scanner myObj = new Scanner(System.in);
-
-    public void transakcje(String[] args, int a, String user,  String userid, double balans){
-        if(a == 0){
-            System.out.println("Jaką kwotę chcesz wpłacić");
-            Scanner myObj = new Scanner(System.in);
-
-            int wplata = Integer.parseInt(myObj.nextLine());
-
-            user.balans == user.balans + wplata;
-
-        } else if (a == 1) {
-            System.out.println("Jaką kwotę chcesz wyplcić");
-            Scanner myObj = new Scanner(System.in);
-
-            int wyplata = Integer.parseInt(myObj.nextLine());
-
-            if(user.balans > wyplata) {
-
-                user.balans == user.balans - wyplata;
-
-            }else{
-                System.out.println("Nie masz wystarczającej ilości środków na koncie");
-            }
-        } else if (a == 2) {
-            System.out.println("podaj id usera któemu chcesz przelać śrdoki");
-
-            int userid = Integer.parseInt(myObj.nextLine());
-            int kwotaprzelewu = Integer.parseInt(myObj.nextLine());
-            if(user.balans > kwotaprzelewu){
-                user.balans == user.balans - kwotaprzelewu;
-                userid.balans == userid.balans + kwotaprzelewu;
-            }else{
-                System.out.println("Nie masz takich srodków na koncie");
-            }
+    public static void deposit(Account account, double amount) {
+        if (amount > 0) {
+            account.setBalance(account.getBalance() + amount);
+            String msg = "Wpłata: +" + amount + " PLN. Nowe saldo: " + account.getBalance() + " PLN";
+            System.out.println(msg);
+            account.getHistoria().dodajOperacje(msg);
         } else {
-            System.out.println("Wystąpił błąd podczas operacji");
+            String msg = "Nieprawidłowa kwota wpłaty!";
+            System.out.println(msg);
+            account.getHistoria().dodajOperacje(msg);
+        }
+    }
+
+    public static void withdraw(Account account, double amount) {
+        if (amount > 0 && account.getBalance() >= amount) {
+            account.setBalance(account.getBalance() - amount);
+            String msg = "Wypłata: -" + amount + " PLN. Pozostałe saldo: " + account.getBalance() + " PLN";
+            System.out.println(msg);
+            account.getHistoria().dodajOperacje(msg);
+        } else {
+            String msg = "Błąd wypłaty: niewystarczające środki lub nieprawidłowa kwota!";
+            System.out.println(msg);
+            account.getHistoria().dodajOperacje(msg);
+        }
+    }
+
+    public static void transfer(Account from, Account to, double amount) {
+        if (amount > 0 && from.getBalance() >= amount) {
+            from.setBalance(from.getBalance() - amount);
+            to.setBalance(to.getBalance() + amount);
+
+            String msgFrom = "Przelew: -" + amount + " PLN do " + to.getOwner() 
+                + ". Pozostałe saldo: " + from.getBalance() + " PLN";
+            String msgTo = "Otrzymano przelew: +" + amount + " PLN od " + from.getOwner() 
+                + ". Nowe saldo: " + to.getBalance() + " PLN";
+
+            System.out.println(msgFrom);
+            System.out.println(msgTo);
+
+            from.getHistoria().dodajOperacje(msgFrom);
+            to.getHistoria().dodajOperacje(msgTo);
+        } else {
+            String msg = "Błąd przelewu: niewystarczające środki lub nieprawidłowa kwota!";
+            System.out.println(msg);
+            from.getHistoria().dodajOperacje(msg);
         }
     }
 }
