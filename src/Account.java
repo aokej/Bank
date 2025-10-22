@@ -3,11 +3,13 @@ public class Account implements Transferable {
     private String accountNumber;
     private String owner;
     private double balance;
+    private TransactionHistory historia;
 
     public Account(String accountNumber, String owner, double balance) {
         this.accountNumber = accountNumber;
         this.owner = owner;
         this.balance = balance;
+        this.historia = new TransactionHistory();
     }
 
     public String getAccountNumber() {
@@ -29,6 +31,10 @@ public class Account implements Transferable {
     }
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public TransactionHistory getHistoria() {
+        return historia;
     }
 
     public void deposit(double amount) {
