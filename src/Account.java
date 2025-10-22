@@ -4,14 +4,12 @@ public class Account implements Transferable {
     private String owner;
     private double balance;
 
-    Account(String An, String O, double b) {
-        accountNumber = An;
-        owner = O;
-        balance = b;
-
-
+    public Account(String accountNumber, String owner, double balance) {
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+        this.balance = balance;
     }
-    ////
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -33,36 +31,16 @@ public class Account implements Transferable {
         this.balance = balance;
     }
 
-    public void withdraw(double amount) {
-        if(balance >= amount && amount > 0) {
-            balance -= amount;
-            System.out.println("Wypłacono " + amount+" PLN, na koncie pozostalo: "+balance+" PLN");
-        }else{
-            System.out.println("Zbyt niskie salko aby dokonać wypłaty!!");
-        }
-    }
-
     public void deposit(double amount) {
-        if(amount > 0) {
-            balance += amount;
-            System.out.println("Pomyślnie wpłacono "+amount+" PLN, na koncie jest obecnie: "+balance+" PLN");
-        }else{
-            System.out.println("Nieprawidłowa kwota wpłaty!!");
-        }
+        Transaction.deposit(this, amount);
     }
 
-    public void transfer(){
-
+    public void withdraw(double amount) {
+        Transaction.withdraw(this, amount);
     }
 
     @Override
-    public void transfer(Account acc1, Account acc2, double amount) {
-        if(acc1.balance >= amount && amount > 0){
-            acc1.balance -= amount;
-            acc2.balance += amount;
-            System.out.println("pomyslnie przelano "+amount+" PLN do uzytkownika "+acc2.owner);
-        }else{
-            System.out.println("nieprawidłowa kwota przelewu lub brak wystarczających średkow na koncie!!");
-        }
+    public void transfer(Account from, Account to, double amount) {
+        Transaction.transfer(from, to, amount);
     }
 }
