@@ -1,19 +1,30 @@
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Logger {
+public interface Logger {
+    void log(String message);
+}
 
-    public static void info(String message) {
+class InfoLogger implements Logger {
+    @Override
+    public void log(String message) {
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("[INFO " + time + "] " + message);
     }
+}
 
-    public static void warn(String message) {
+class WarnLogger implements Logger {
+    @Override
+    public void log(String message) {
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("[UWAGA " + time + "] " + message);
     }
+}
 
-    public static void error(String message) {
+class ErrorLogger implements Logger {
+    @Override
+    public void log(String message) {
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("[BŁĄD " + time + "] " + message);
     }
