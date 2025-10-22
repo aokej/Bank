@@ -26,7 +26,6 @@ public class Transaction {
         }
     }
 
-    @Override
     public static void transfer(Account from, Account to, double amount) {
         if (amount > 0 && from.getBalance() >= amount) {
             from.setBalance(from.getBalance() - amount);
