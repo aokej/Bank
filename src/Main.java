@@ -244,7 +244,7 @@ public class Main {
         } else if (currentAccount instanceof SavingsAccount) {
             SavingsAccount savKonto = (SavingsAccount) currentAccount;
             System.out.println("Typ konta: Konto oszczędnościowe");
-            System.out.println("Program: " + savKonto.getCompanyName());
+            System.out.println("Program: " + savKonto.getClientName());
         } else {
             System.out.println("Typ konta: Konto standardowe");
         }

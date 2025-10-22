@@ -1,9 +1,9 @@
 public class SavingsAccount extends Account {
-    private String CompanyName;
+    private String ClientName;
 
    SavingsAccount(String An, String O, double b, String cn) {
         super(An, O, b);
-        CompanyName = cn;
+        ClientName = cn;
     }
 
     public String getClientName(){
