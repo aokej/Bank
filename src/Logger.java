@@ -1,22 +1,28 @@
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-class InfoLogger {
+public interface Logger {
+    void log(String message);
+}
+
+class InfoLogger implements Logger {
+    @Override
     public void log(String message) {
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("[INFO " + time + "] " + message);
     }
 }
 
-class WarnLogger {
+class WarnLogger implements Logger {
+    @Override
     public void log(String message) {
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("[UWAGA " + time + "] " + message);
     }
 }
 
-class ErrorLogger {
+class ErrorLogger implements Logger {
+    @Override
     public void log(String message) {
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println("[BŁĄD " + time + "] " + message);
@@ -25,12 +31,12 @@ class ErrorLogger {
 
 public class Main {
     public static void main(String[] args) {
-        InfoLogger info = new InfoLogger();
-        WarnLogger warn = new WarnLogger();
-        ErrorLogger error = new ErrorLogger();
+        Logger info = new InfoLogger();
+        Logger warn = new WarnLogger();
+        Logger error = new ErrorLogger();
 
-        info.log("Info");
-        warn.log("Uwaga");
-        error.log("Błąd");
+        info.log("Zalogowano użytkownika do systemu bankowego.");
+        warn.log("Próba logowania z nieznanego urządzenia.");
+        error.log("Nieudana autoryzacja przelewu!");
     }
 }
